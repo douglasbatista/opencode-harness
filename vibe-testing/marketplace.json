@@ -1,0 +1,32 @@
+{
+  "name": "vibe-testing",
+  "version": "1.0.0",
+  "description": "Pressure-test specs with LLM reasoning before writing code",
+  "author": "knot0-com",
+  "license": "MIT",
+  "repository": "https://github.com/knot0-com/vibe-testing",
+  "skills": [
+    {
+      "name": "vibe-testing",
+      "path": ".",
+      "description": "Validate spec documents by simulating real-world scenarios against them using LLM reasoning"
+    }
+  ],
+  "compatibility": [
+    "claude-code",
+    "codex",
+    "gemini-cli",
+    "cursor",
+    "github-copilot",
+    "opencode",
+    "windsurf",
+    "antigravity"
+  ],
+  "tags": [
+    "testing",
+    "specifications",
+    "architecture",
+    "validation",
+    "planning"
+  ]
+}
