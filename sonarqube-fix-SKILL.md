@@ -35,40 +35,73 @@ cd <sonarqube-prompt-factory-repo>
 uv tool install .
 ```
 
-If uv is not available or SSL fails during install, see the troubleshooting section below.
+If uv is not available or SSL fails during install, see the SSL troubleshooting section below.
 
-Check config exists in the current project directory (typically `config.yaml` or the path
-passed via `--config`). If missing, tell the user which fields are required:
-- `sonarqube_url`, `sonarqube_token`, `project_key`
-- `llm_base_url` (must NOT be openai.com — internal endpoint only)
+### 1.2 Determine configuration
 
-### 1.2 Test connectivity before full run
+Check if a config file exists in the current directory:
+
+```bash
+ls config.yaml 2>/dev/null || echo "no config file"
+```
+
+**If a config file exists** — use it, no further questions needed:
 
 ```bash
 sonarqube-prompt-factory --config config.yaml --test-connection
 ```
 
-If either service shows FAILED: stop and report the specific error to the user.
-Do not proceed to generation with a broken connection.
+**If no config file exists** — the tool reads credentials from environment variables
+(`SONARQUBE_URL`, `SONARQUBE_TOKEN`, `LLM_BASE_URL`, `LLM_API_KEY`). Ask the user
+for only the two values that have no env var fallback:
+
+- `project_key` — the SonarQube project key (e.g. `my-app` or `com.example:my-app`)
+- `llm_model` — the model name to use (e.g. `gpt-4o`, `claude-sonnet-4-6`)
+
+Also confirm the branch:
+
+```bash
+git rev-parse --abbrev-ref HEAD
+```
+
+Show the inferred branch to the user and ask them to confirm or override. If the
+directory is not a git repo, ask the user for the branch name explicitly.
+
+Then test connectivity:
+
+```bash
+sonarqube-prompt-factory --project-key <key> --test-connection
+```
+
+If either service shows FAILED: stop and report the specific error. Do not proceed.
 
 ### 1.3 Run the generator
 
+**With config file:**
 ```bash
 sonarqube-prompt-factory --config config.yaml [additional flags]
 ```
 
-Common flags the user may want:
-- `--severities BLOCKER,CRITICAL` — limit to high-severity issues
+**Without config file:**
+```bash
+sonarqube-prompt-factory \
+  --project-key <key> \
+  [--branch <branch>] \
+  [additional flags]
+```
+
+The tool infers the branch from git automatically — only pass `--branch` if the user
+confirmed a different branch in step 1.2, or if the repo is not a git repo.
+
+Common optional flags:
+- `--severities BLOCKER,CRITICAL` — default is BLOCKER,CRITICAL,MAJOR
 - `--max-issues 50` — cap for large projects
-- `--output-dir ./sonar-fixes` — custom output directory
+- `--output-dir ./sonar-fixes` — default is `./prompts`
 - `--all-code` — include issues outside the new code period
 
-Relative paths (`--output-dir ./sonar-fixes`, `--config config.yaml`) resolve against
-the current working directory — run from the project root being analyzed.
-
 Capture the exit code. Exit 0 = success or partial success. Exit 1 = fatal failure
-(config error, total connectivity failure). Partial failures (some files failed LLM
-analysis) still exit 0 — the manifest shows which files failed.
+(config error, connectivity failure). Partial failures (some files failed LLM analysis)
+still exit 0 — the manifest shows which files failed.
 
 ### 1.4 Locate the manifest
 
@@ -165,8 +198,10 @@ Summary:
 | Symptom | Cause | Action |
 |---|---|---|
 | `command not found: sonarqube-prompt-factory` | Tool not installed globally | `cd <tool-repo> && uv tool install .` |
-| `openai.com is blocked` at startup | `llm_base_url` points to public OpenAI | User must update config to internal endpoint |
-| SonarQube: FAILED (401) | Bad or expired token | User must refresh `sonarqube_token` |
+| `ConfigError: sonarqube_url is required` | Env var `SONARQUBE_URL` not set, no config file | User must set env var or provide config file |
+| `ConfigError: project_key is required` | Not passed via `--project-key` and no config file | Ask user for project key |
+| `openai.com is blocked` at startup | `llm_base_url` points to public OpenAI | User must set internal endpoint in env or config |
+| SonarQube: FAILED (401) | Bad or expired token | User must refresh `SONARQUBE_TOKEN` env var |
 | `_manifest.json` absent | Older tool version without manifest support | Fall back to ls glob (see 1.4) |
 | Before-code not found in source | Source changed since SonarQube analysis | Log warning, continue; advise user to re-run analysis |
 | LLM analysis failed for N files | Timeout or malformed LLM response | Check `failed_files` in manifest; rerun with `--verbose` |
