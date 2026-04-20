@@ -1,0 +1,21 @@
+{
+	"nodes":[
+		{"id":"8681b67b2173f7bf","type":"group","x":-540,"y":-235,"width":1000,"height":170,"color":"4","label":"Agentic AI solution"},
+		{"id":"ee592221d4f22cea","type":"text","text":"sonarqube-agent-cli","x":-125,"y":-180,"width":250,"height":60},
+		{"id":"aee1a8e8f287e8b4","type":"text","text":"sonarqube API","x":-125,"y":-340,"width":250,"height":60,"color":"2"},
+		{"id":"90332e733fdc7654","type":"text","text":"LLM","x":-124,"y":-20,"width":250,"height":60,"color":"#e70808"},
+		{"id":"62909e9419952b30","type":"text","text":"sonarqube-helper-skill","x":-500,"y":-180,"width":280,"height":60},
+		{"id":"3758675023bcf379","type":"text","text":"issues reports\n- one report per code file","x":200,"y":-215,"width":220,"height":130},
+		{"id":"3782d38384afcc39","type":"text","text":"coding agent\n- Roo Code / Opencode","x":-141,"y":140,"width":283,"height":90,"color":"5"},
+		{"id":"e53049aefa1b8ba4","x":520,"y":-340,"width":307,"height":320,"type":"text","text":"1. carregar skill\n2. executar tool\n3. carregar issues usando API\n4. utilizar LLM para analisar issues\n5. criar reports\n6. ler os reports\n7. usa LLM para corrigir os issues"}
+	],
+	"edges":[
+		{"id":"ee922db4e5457107","fromNode":"ee592221d4f22cea","fromSide":"bottom","toNode":"90332e733fdc7654","toSide":"top","fromEnd":"arrow","color":"5","label":"4"},
+		{"id":"efe911adde1b22bd","fromNode":"ee592221d4f22cea","fromSide":"right","toNode":"3758675023bcf379","toSide":"left","color":"5","label":"5"},
+		{"id":"6c438f423a334e3f","fromNode":"90332e733fdc7654","fromSide":"bottom","toNode":"3782d38384afcc39","toSide":"top","fromEnd":"arrow","color":"5","label":"7"},
+		{"id":"b6ea2d886f5eabb9","fromNode":"3782d38384afcc39","fromSide":"right","toNode":"3758675023bcf379","toSide":"bottom","color":"5","label":"6"},
+		{"id":"f6cd32ee217c9820","fromNode":"ee592221d4f22cea","fromSide":"top","toNode":"aee1a8e8f287e8b4","toSide":"bottom","color":"5","label":"3"},
+		{"id":"26142803660d68ce","fromNode":"3782d38384afcc39","fromSide":"left","toNode":"62909e9419952b30","toSide":"bottom","color":"5","label":"1"},
+		{"id":"e893052539d65a37","fromNode":"3782d38384afcc39","fromSide":"left","toNode":"ee592221d4f22cea","toSide":"left","color":"5","label":"2"}
+	]
+}

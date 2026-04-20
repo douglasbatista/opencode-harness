@@ -1,0 +1,29 @@
+{
+	"nodes":[
+		{"id":"035d43ab07b7a9a7","type":"group","x":-200,"y":-1040,"width":860,"height":620,"color":"4","label":"Hoje -> Agentic Era"},
+		{"id":"b91b7002fb77bd0f","type":"group","x":-720,"y":-1040,"width":460,"height":555,"color":"#d89f4f","label":"5 meses atrás -> Prompt Era"},
+		{"id":"19a1de031c23e2ae","type":"group","x":230,"y":-730,"width":380,"height":270,"color":"#b09292","label":"Agent Harness"},
+		{"id":"4e9a583a51438a4e","type":"group","x":-160,"y":-715,"width":300,"height":240,"color":"5","label":"Agentic loop"},
+		{"id":"92178a165317dcea","type":"text","text":"Nenhuma interação física com o mundo real ou digital!","x":-615,"y":-630,"width":250,"height":110,"color":"#b40808"},
+		{"id":"b97538a59f86e3c2","type":"link","url":"https://media.formula1.com/image/upload/v1712849101/content/dam/fom-website/drivers/2024Drivers/tsunoda.png","x":-576,"y":-1000,"width":172,"height":173},
+		{"id":"1da107dc8069c41e","type":"text","text":"LLM","x":-545,"y":-720,"width":110,"height":60,"color":"4"},
+		{"id":"f2cd3816df751d7b","type":"text","text":"**AGENTES** interação com o mundo real/digital. Ex:\n- acesso à internet\n- criar/editar arquivos\n- Integração com sub-agentes\n- Utilizar habilidades personalizadas","x":200,"y":-1028,"width":440,"height":228,"color":"4"},
+		{"id":"2aa210ee6dc52ec6","type":"text","text":"Ferramentas","x":250,"y":-710,"width":160,"height":60,"color":"6"},
+		{"id":"e52e47fa5d0cc797","type":"text","text":"AGENTS.md","x":250,"y":-624,"width":160,"height":60,"color":"6"},
+		{"id":"92cda7377c77a677","type":"text","text":"Skills","x":430,"y":-710,"width":160,"height":60,"color":"6"},
+		{"id":"cab0632a60a6a1c1","type":"text","text":"MCPs","x":430,"y":-624,"width":160,"height":60,"color":"6"},
+		{"id":"dbc9c4f47bce5173","type":"text","text":"SUB-AGEMTES ESPECIALIZADOS","x":250,"y":-547,"width":340,"height":60,"color":"#bb7c7c"},
+		{"id":"29f0b1eb2ab8b95f","type":"text","text":"LLM","x":-80,"y":-565,"width":156,"height":60,"color":"4"},
+		{"id":"9875890019e93fe7","type":"link","url":"https://www.grandepremio.com.br/wp-content/uploads/2025/02/Max-Verstappen-Red-Bull-macacao-2025-Foto-Red-Bull-1152x1536.jpg","x":-91,"y":-1000,"width":179,"height":212},
+		{"id":"b95710ed9e942687","type":"text","text":"**AGENTE**","x":-80,"y":-680,"width":156,"height":60,"color":"#bb7c7c"}
+	],
+	"edges":[
+		{"id":"c2acce35a0486518","fromNode":"b97538a59f86e3c2","fromSide":"bottom","toNode":"1da107dc8069c41e","toSide":"top","color":"2","label":"prompt"},
+		{"id":"61d232257a8fb47a","fromNode":"1da107dc8069c41e","fromSide":"right","toNode":"b97538a59f86e3c2","toSide":"right","color":"4","label":"texto"},
+		{"id":"d20ecd7784576428","fromNode":"b95710ed9e942687","fromSide":"bottom","toNode":"29f0b1eb2ab8b95f","toSide":"top","color":"#b8c328"},
+		{"id":"4889c71563e27341","fromNode":"29f0b1eb2ab8b95f","fromSide":"left","toNode":"b95710ed9e942687","toSide":"left","color":"#d80e0e"},
+		{"id":"904c69f52b5dacca","fromNode":"19a1de031c23e2ae","fromSide":"left","toNode":"4e9a583a51438a4e","toSide":"right","toEnd":"none","color":"1"},
+		{"id":"54bca28bc6a5566f","fromNode":"9875890019e93fe7","fromSide":"bottom","toNode":"b95710ed9e942687","toSide":"top","color":"2"},
+		{"id":"2023246b09caf47b","fromNode":"b95710ed9e942687","fromSide":"right","toNode":"9875890019e93fe7","toSide":"right","color":"4"}
+	]
+}
